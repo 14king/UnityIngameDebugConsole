@@ -217,10 +217,6 @@ namespace IngameDebugConsole
 #endif
 			}
 
-			// Listen for entered commands
-			commandInputField.onValidateInput -= OnValidateCommand;
-			commandInputField.onValidateInput += OnValidateCommand;
-
 			if( minimumHeight < 200f )
 				minimumHeight = 200f;
 
@@ -240,9 +236,6 @@ namespace IngameDebugConsole
 			if( logcatListener != null )
 				logcatListener.Stop();
 #endif
-
-			// Stop receiving commands
-			commandInputField.onValidateInput -= OnValidateCommand;
 		}
 
 		// Launch in popup mode
@@ -298,30 +291,35 @@ namespace IngameDebugConsole
 #endif
 		}
 
-		// Command field input is changed, check if command is submitted
-		public char OnValidateCommand( string text, int charIndex, char addedChar )
+		public void ResizeInputFiled(BaseEventData dat)
 		{
-			// If command is submitted
-			if( addedChar == '\n' )
-			{
-				// Clear the command field
-				if( clearCommandAfterExecution )
-					commandInputField.text = "";
+			PointerEventData eventData = (PointerEventData)dat;
 
-				if( text.Length > 0 )
-				{
-					// Execute the command
-					DebugLogConsole.ExecuteCommand( text );
-
-					// Snap to bottom and select the latest entry
-					SetSnapToBottom( true );
-				}
-
-				return '\0';
-			}
-
-			return addedChar;
+			RectTransform inputRT = commandInputField.GetComponent<RectTransform>();
+			Vector2 size = inputRT.sizeDelta;
+			float delta = eventData.position.y - inputRT.position.y;
+			float newHeight = Mathf.Min(canvasTR.sizeDelta.y - 36, Mathf.Max(36 + delta, 36));
+			size.y = newHeight;
+			inputRT.sizeDelta = size;
 		}
+
+		public void DoCommand()
+		{
+			string text = commandInputField.text;
+			// Clear the command field
+			if (clearCommandAfterExecution)
+				commandInputField.text = "";
+
+			if (text.Length > 0)
+			{
+				// Execute the command
+				DebugLogConsole.ExecuteCommand(text);
+
+				// Snap to bottom and select the latest entry
+				SetSnapToBottom(true);
+			}
+		}
+
 
 		// A debug entry is received
 		private void ReceivedLog( string logString, string stackTrace, LogType logType )
@@ -633,6 +631,7 @@ namespace IngameDebugConsole
 			else
 			{
 				newLogItem = Instantiate<DebugLogItem>( logItemPrefab, logItemsContainer, false );
+				newLogItem.gameObject.SetActive(true);
 				newLogItem.Initialize( recycledListView );
 			}
 

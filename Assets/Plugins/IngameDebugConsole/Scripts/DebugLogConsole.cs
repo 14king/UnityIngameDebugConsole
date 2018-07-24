@@ -148,6 +148,12 @@ namespace IngameDebugConsole
 			Debug.Log( stringBuilder.Append( "\n" ).ToString() );
 		}
 
+		[ConsoleMethod("testvector3", "Prints system information")]
+		public static void LogVector3(Vector3 v)
+		{
+			Debug.Log(v);
+		}
+
 		// Logs system information
 		[ConsoleMethod( "sysinfo", "Prints system information" )]
 		public static void LogSystemInfo()
