@@ -3,7 +3,7 @@
 ### 控制台界面
 ![popup](LibSource/Images/1.png)
 
-本插件UI使用的是UGUI，不必担心版本更新的问题。而且原作者编写的循环列表效率很好，B格也贼高。于是在基础上改了改ui，以及加入了xlua脚本调用。
+本插件UI使用的是UGUI，不必担心版本更新的问题，手机平台上也正常运行。原作者编写的循环列表效率很好，B格也贼高。于是在基础上改了改ui，以及加入了xlua脚本调用。
 
 原github地址:https://github.com/yasirkula/UnityIngameDebugConsole.git
 ### 运行指令
