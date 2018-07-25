@@ -74,3 +74,8 @@ DebugLogConsole.AddCommondRuleAction(your rule)
     使用回车键可以扩大输入框，Ctrl+回车键 或者点击发送按钮执行指令
     手机上从电脑上发送信息上来，然后粘贴进去吧
 ![popup](LibSource/Images/4.png)
+
+#### 运行lua代码
+![popup](LibSource/Images/5.png)
+
+![popup](LibSource/Images/6.png)
