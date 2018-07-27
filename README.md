@@ -44,7 +44,6 @@ public class TestScript : MonoBehaviour
 
 - 你可以使用 [] 来代表Vector.zero
 - 你可以使用1代表true,0代表false
-- 
 
 游戏内部要注销指令可以使用代码
 ```csharp
