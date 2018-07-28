@@ -29,7 +29,12 @@ namespace IngameDebugConsole
 
 	public class DebugLogManager : MonoBehaviour
 	{
-		private static DebugLogManager instance = null;
+        public static DebugLogManager Instance {
+            get {
+                return instance;
+            }
+        }
+        private static DebugLogManager instance = null;
 
 		[Header( "Properties" )]
 		[SerializeField]
@@ -39,8 +44,11 @@ namespace IngameDebugConsole
 		[SerializeField]
 		private float minimumHeight = 200f;
 
-		// Should command input field be cleared after pressing Enter
-		[SerializeField]
+        [SerializeField]
+        private GestureAround gestureAround = null;
+
+        // Should command input field be cleared after pressing Enter
+        [SerializeField]
 		private bool startInPopupMode = true;
 
 		[SerializeField]
@@ -158,7 +166,27 @@ namespace IngameDebugConsole
 		private DebugLogLogcatListener logcatListener;
 #endif
 
-		private void OnEnable()
+        public void ToggleDebugWin()
+        {
+            logWindowTR.gameObject.SetActive(!logWindowTR.gameObject.activeSelf);
+            popupManager.gameObject.SetActive(!popupManager.gameObject.activeSelf);
+            gestureAround.enabled = !popupManager.gameObject.activeSelf;
+        }
+
+        void Awake()
+        {
+            bool active = logWindowTR.gameObject.activeSelf;
+            logWindowTR.gameObject.SetActive(true);
+            logWindowTR.gameObject.SetActive(active);
+
+            active = logWindowTR.gameObject.activeSelf;
+            popupManager.gameObject.SetActive(true);
+            popupManager.gameObject.SetActive(active);
+
+            gestureAround.enabled = !active;
+        }
+
+        private void OnEnable()
 		{
 			// Only one instance of debug console is allowed
 			if( instance == null )

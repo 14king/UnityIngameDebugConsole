@@ -46,21 +46,21 @@ namespace IngameDebugConsole
 		// Coroutines for simple code-based animations
 		private IEnumerator moveToPosCoroutine = null;
 
-		void Awake()
-		{
-			popupTransform = (RectTransform) transform;
-			backgroundImage = GetComponent<Image>();
-			canvasGroup = GetComponent<CanvasGroup>();
+        void Awake()
+        {
+            popupTransform = (RectTransform)transform;
+            backgroundImage = GetComponent<Image>();
+            canvasGroup = GetComponent<CanvasGroup>();
 
-			normalColor = backgroundImage.color;
-		}
+            normalColor = backgroundImage.color;
+        }
 
-		void Start()
-		{
-			halfSize = popupTransform.sizeDelta * 0.5f * popupTransform.root.localScale.x;
-		}
+        void Start()
+        {
+            halfSize = popupTransform.sizeDelta * 0.5f * popupTransform.root.localScale.x;
+        }
 
-		public void OnViewportDimensionsChanged()
+        public void OnViewportDimensionsChanged()
 		{
 			halfSize = popupTransform.sizeDelta * 0.5f * popupTransform.root.localScale.x;
 			OnEndDrag( null );
@@ -215,7 +215,7 @@ namespace IngameDebugConsole
 
 			// Smoothly translate the popup to the specified position
 			moveToPosCoroutine = MoveToPosAnimation( pos );
-			StartCoroutine( moveToPosCoroutine );
+			DebugLogManager.Instance.StartCoroutine( moveToPosCoroutine );
 
 			isPopupBeingDragged = false;
 		}
