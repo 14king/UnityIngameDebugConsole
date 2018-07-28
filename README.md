@@ -1,5 +1,8 @@
 # Unity 3D 游戏内部控制台
 
+### 呼出
+按住屏幕，画一个圈圈即可呼出界面
+
 ### 控制台界面
 ![popup](LibSource/Images/1.png)
 
